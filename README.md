@@ -1,6 +1,12 @@
 # Summergeeks-Assignment
 Entry Management System for Summergeeks Internship
 
+>#### Note: This git repo is hosted on Heroku and working fine but mail service may not work because for sending mail I have used my personal Gmail Account and if free hosting gets down and then I have to authenticate my Gmail account using display Unlock Captcha. *But you can use your personal account for sending mail.*
+
+
+### Problem with Nexmo 
+> All SMS Conversation API only allows to send SMS to only white-listed numbers for free, Since my Nexmo Account is on trial so numbers which I don't have in my White-list cannot receive SMS through this API.
+
 # Summergeeks Assignment GUI
 
 This is a UI for **Summergeeks Assignment**, created using ReactJs
