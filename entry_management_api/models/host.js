@@ -96,8 +96,8 @@ function sendSMS(host_id, data,callback){
       error = err;
     }else{
       const nexmo = new Nexmo({
-        apiKey: '49851512',
-        apiSecret: 'KOFBVNHQ1KOqRw4Q',
+        apiKey: config.nexmoInfo.API_KEY,
+        apiSecret: config.nexmoInfo.SECRET_KEY,
       }, {debug:true});
 
       const from = data.name;

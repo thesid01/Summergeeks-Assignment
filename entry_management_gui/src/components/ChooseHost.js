@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../App.css';
+import config from '../config.json'
 
 class ChooseHost extends Component {
     _mounted = false;
@@ -20,7 +21,7 @@ class ChooseHost extends Component {
         super();
         
         this.state = {
-            url : "http://localhost:3000",
+            url : config.url,
             hostID:"",
             hostInfo : [],
             isLoaded : false,

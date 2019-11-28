@@ -1,4 +1,5 @@
 import React, { Component } from "react"; 
+import config from '../config.json'
 
 class VisitorForm extends Component {
     _errors = {
@@ -10,7 +11,7 @@ class VisitorForm extends Component {
     constructor(){
         super();
         this.state={
-            url: "http://localhost:3000",
+            url: config.url,
             hostID : "",
             email : "",
             name : "",

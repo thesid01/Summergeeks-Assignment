@@ -2,6 +2,7 @@ var mongoose= require("mongoose");
 var validator = require('validator');
 var nodemailer = require('nodemailer');
 var host  = require('./host');
+const Nexmo = require('nexmo');
 const config = require('../config/config')
 
 
@@ -88,9 +89,10 @@ function sendSMS(data,callback){
       error = err;
     }else{
       const nexmo = new Nexmo({
-        apiKey: '49851512',
-        apiSecret: 'KOFBVNHQ1KOqRw4Q',
+        apiKey: config.nexmoInfo.API_KEY,
+        apiSecret: config.nexmoInfo.SECRET_KEY,
       }, {debug:true});
+
 
       const from = data.name;
       const to = '918604074906';
@@ -130,7 +132,7 @@ async function checkoutSeneder(visitor_data,host_data){
     
       var message = `
       You are visiting`+host_data.name+`<br>
-      To Checkout Click here https://summergeeks-entry-management.herokuapp.com/visitor/checkout/`+visitor_data._id+`
+      To Checkout Click here https://summergeeks-assignment-api.herokuapp.com/visitor/checkout/`+visitor_data._id+`
       `;
       let info = await transporter.sendMail({
         from: '"'+host_data.name+'" <'+host_data.email+'>',
