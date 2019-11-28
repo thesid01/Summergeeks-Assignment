@@ -1,6 +1,6 @@
 var mailInfo = {
-    username : 'siddharthkumarverma84262@gmail.com' ,
-    password : '1s2i3d@KV' 
+    username : 'xxxx@xxxxxxx.com' ,
+    password : 'xxxxxxxxx' 
 }
 
 module.exports.mailInfo = mailInfo;
