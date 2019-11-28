@@ -58,13 +58,13 @@ router.post('/add/:id', (req, res, next) => {
                                         }
                                     });
 
-                                    // host.sendSMS(req.params.id,data,(err)=>{
-                                    //     if(err){
-                                    //         console.log("Error while sending SMS");
-                                    //     }else{
-                                    //         console.log("SMS Sent");
-                                    //     }
-                                    // });
+                                    host.sendSMS(req.params.id,data,(err)=>{
+                                        if(err){
+                                            console.log("Error while sending SMS");
+                                        }else{
+                                            console.log("SMS Sent");
+                                        }
+                                    });
                                 }
                             });
                           }
@@ -101,13 +101,13 @@ router.get('/checkout/:id', (req,res,next)=>{
                     console.log("Mail Sent");
                 }
             });
-            // visitor.sendSMS(data,(err)=>{
-            //     if(err){
-            //         console.log("Error while sending SMS");
-            //     }else{
-            //         console.log("SMS Sent");
-            //     }
-            // });
+            visitor.sendSMS(data,(err)=>{
+                if(err){
+                    console.log("Error while sending SMS");
+                }else{
+                    console.log("SMS Sent");
+                }
+            });
             res.send({checkOut:1})
         }
     });
