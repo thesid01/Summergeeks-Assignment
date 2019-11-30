@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%=name%></title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container-fluid">
+        <% if(checkOut===1){ %>
+            <div class="h1">Thanks</div><div class="h2 font-weight-light"> For visiting.</div>
+        <%}else if(checkOut===0){%>
+            <div class="h1">Access Denied.</div><div class="h2 font-weight-light">May you have wrong checkout link, check your link and try again.</div>
+        <%}else{%>
+            <div class="h1">Sorry</div><div class="h2 font-weight-light"><%=error%></div>
+        <%}%>
+        </div>
+     
+</body>
+</html>

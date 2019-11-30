@@ -89,26 +89,36 @@ router.get('/checkout/:id', (req,res,next)=>{
     const doc = visitor.visitorInfo.findById(req.params.id).exec((err, data)=>{
         if(err){
             console.log("Error Occured while checkout");
-            res.send({checkOut:0, error: "Error Occured while checkout"})
+            // res.send({checkOut:0, error: "Error Occured while checkout"})
+            res.render('checkout',{checkOut:0, name: "Error", error: "Error Occured while checkout"});
         }else{
-            console.log(data);
-            data.checkOut = Date();
-            data.save();
-            visitor.sendMail(data,(err)=>{
-                if(err){
-                    console.log("Error while sending mail");
-                }else{
-                    console.log("Mail Sent");
-                }
-            });
-            visitor.sendSMS(data,(err)=>{
-                if(err){
-                    console.log("Error while sending SMS");
-                }else{
-                    console.log("SMS Sent");
-                }
-            });
-            res.send({checkOut:1})
+            if(!data){
+                res.render('checkout',{checkOut:2, name: "Error", error: "Such a visitor does not exist."});   
+            }else if(data.checkIn.getTime() >= data.checkOut.getTime()){
+                console.log(data);
+                console.log(data.checkIn > data.checkOut);
+                data.checkOut = Date();
+                data.save();
+                // visitor.sendMail(data,(err)=>{
+                //     if(err){
+                //         console.log("Error while sending mail");
+                //     }else{
+                //         console.log("Mail Sent");
+                //     }
+                // });
+                // visitor.sendSMS(data,(err)=>{
+                //     if(err){
+                //         console.log("Error while sending SMS"); 
+                //     }else{
+                //         console.log("SMS Sent");
+                //     }
+                // });
+                // res.send({checkOut:1, name: data.name})
+                res.render('checkout',{checkOut:1, name: data.name});
+            }else{
+                res.render('checkout',{checkOut:2, name: "Error", error: "You are already checked out"});   
+            }
+            
         }
     });
     

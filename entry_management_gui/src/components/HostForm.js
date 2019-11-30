@@ -146,7 +146,7 @@ class HostForm extends Component {
                         value={this.state.phoneNumber}
                         onChange={this.handlePhoneNumber}></input>
                     
-                    <input required type="text" id="FormPhone"
+                    <input required type="text" id="FormAddress"
                         name="address"
                         className="form-control mb-4" 
                         placeholder="Address"

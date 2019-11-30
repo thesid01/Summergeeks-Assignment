@@ -4,7 +4,9 @@ import config from '../config.json'
 
 class ChooseHost extends Component {
     _mounted = false;
-
+    _errors = {
+        name : ""
+    }
     main_style = {
         display: 'flex',
         justifyContent:'center',
@@ -23,8 +25,11 @@ class ChooseHost extends Component {
         this.state = {
             url : config.url,
             hostID:"",
+            searchResults: [],
+            hostSearchName : "",
             hostInfo : [],
             isLoaded : false,
+            searchInfo: "No host found with this name",
             Info : "Your Data is Loading...",
             error : "",
         }
@@ -87,6 +92,45 @@ class ChooseHost extends Component {
         this.props.enableForm();
     }
 
+    search_host = (target) => {
+        if(this.state.hostInfo.length>=0){
+            var arr = this.state.hostInfo
+            if(target.value.length!=0){
+                arr.forEach((host)=>{
+                    console.log(host);
+                    const a = host.name.toUpperCase(),
+                          b = target.value.toUpperCase();
+
+                    if(a.startsWith(b)){
+                        this.setState(prevState => ({
+                            searchResults: [...prevState.searchResults, host]
+                        }))
+                    }
+                })
+            }
+        }
+    }
+
+    handleSearchInput = (event)=>{
+        const { target } = event;
+        if (!event.target.value.match(/^[a-zA-Z ]*$/)) {
+            this._errors.name = "*Please enter alphabet characters only.";
+        }else{
+            this._errors.name = "";
+        }
+
+        this.setState({
+            hostSearchName : event.target.value
+        },()=>{
+            console.log(this.state.hostSearchName);
+        })
+
+        this.setState({
+            searchResults : []
+        },()=>{
+            this.search_host(target)
+        })
+    }
 
     componentDidMount(){
         this._mounted = true;
@@ -128,15 +172,24 @@ class ChooseHost extends Component {
                         Welcome to Entry-Management
                     </div>
 
-                    <form className="w-100" onSubmit={this.handleFormSubmit}>
+                    <form className="w-100" >
                         <input type="text" id="host-id" 
                                 className="form-control z-depth-1 w-100" 
                                 placeholder="Enter Host Id to Visit" 
                                 onChange={this.handleInput}
                                 value={this.state.hostID}></input>
-                        <button className="btn head-color mx-auto mt-4" style={this.sub_style}> Appoint a meeting</button>
+                        <div className="row">
+                            <div className="col">
+                                <button className="btn head-color mx-auto mt-4" onClick={this.handleFormSubmit} style={this.sub_style}> Appoint your meeting</button>
+                            </div>
+                            <div className="col">
+                                <button data-toggle="modal" data-target="#searchModal"
+                                onClick={this.handleLinkClick}
+                                 className="btn head-color mx-auto mt-4" style={this.sub_style}>Search Host by Name</button>
+                            </div>
+                        </div>
                     </form>
-                   
+                    
                     <div style={this.sub_style}>
                         Don't know Host ID find&nbsp;
                         <button href="#" data-toggle="modal" data-target="#showHost"
@@ -144,6 +197,44 @@ class ChooseHost extends Component {
                                 className="text-warning z-depth-0 border-0 primary-color" >Click here</button>
                                 
                     </div>
+
+                    <div className="modal fade" id="searchModal" tabIndex="-1" role="dialog" aria-labelledby="SearchByHostName"
+                    aria-hidden="true">
+
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+
+                        <div className="modal-content">
+                        <div className="modal-header head-color">
+                            <h5 className="modal-title" id="exampleModalLongTitle">Search By Name</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body text-dark container">
+                        <small className="text-danger">{this._errors.name}</small>
+                        <input type="text" id="host-name" 
+                                className="form-control z-depth-1 w-100" 
+                                placeholder="Enter Host Name to Search" 
+                                onChange={this.handleSearchInput}
+                                value={this.state.hostSearchName}></input>
+
+                        {this.state.searchResults.length !==0 ? this.state.searchResults.map((anObjectMapped, index) => {
+                            return (
+                                <a href="#" data-dismiss="modal" 
+                                onClick = {() => this.setState({hostID : anObjectMapped._id})} 
+                                className="row m-2" key={`${anObjectMapped._id}`}>
+
+                                    <div className="col"><strong>{anObjectMapped.name}({anObjectMapped.email})</strong></div>
+                                    {/* <div className="col-6">{anObjectMapped._id}</div> */}
+                                </a>
+                            );
+                        }) : this.state.searchInfo}
+
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
 
                     <div className="modal fade" id="showHost" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                     aria-hidden="true">
