@@ -42,7 +42,7 @@ async function sender(visitor_data,host_data) {
   let testAccount = await nodemailer.createTestAccount();
 
   let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service:config.mailInfo.service,
     auth: {
       user: config.mailInfo.username,
       pass: config.mailInfo.password
@@ -59,13 +59,13 @@ async function sender(visitor_data,host_data) {
   <br><strong>Address Visited :</strong> `+host_data.address+`
   `;
   let info = await transporter.sendMail({
-    from: '"'+host_data.name+'" <'+host_data.email+'>',
+    from: config.mailInfo.username,
     to: visitor_data.email,
     subject: "Details about meeting",
     html: message
+  },()=>{
+    console.log("Message sent: %s", info.messageId);
   });
-
-  console.log("Message sent: %s", info.messageId);
 }
 
 function sendMail(data,callback){
@@ -97,13 +97,13 @@ function sendSMS(data,callback){
       const from = data.name;
       const to = '918604074906';
       var text = `
-      <strong>Name :</strong> `+data.name+`
-      <br>\n<strong>Host Name :</strong> `+data.name+`
-      <br><strong>Host Phone Number :</strong> `+data.phoneNumber+`
-      <br><strong>Host Email :</strong> `+host_data.email+`
-      <br><strong>CheckIn Time :</strong> `+data.checkIn+`
-      <br><strong>CheckOut Time :</strong> `+data.checkOut+`
-      <br><strong>Address Visited :</strong> `+host_data.address+`
+      Name : `+data.name+`
+      Host Name : `+data.name+`
+      Host Phone Number : `+data.phoneNumber+`
+      Host Email : `+host_data.email+`
+      CheckIn Time : `+data.checkIn+`
+      CheckOut Time : `+data.checkOut+`
+      Address Visited : `+host_data.address+`
       `;
 
       nexmo.message.sendSms('918604074906', to, text,{type:'unicode'},(err,response)=>{
@@ -123,7 +123,7 @@ async function checkoutSeneder(visitor_data,host_data){
   let testAccount = await nodemailer.createTestAccount();
 
       let transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: config.mailInfo.service,
         auth: {
           user: config.mailInfo.username,
           pass: config.mailInfo.password
@@ -135,7 +135,8 @@ async function checkoutSeneder(visitor_data,host_data){
       To Checkout Click here https://summergeeks-assignment-api.herokuapp.com/visitor/checkout/`+visitor_data._id+`
       `;
       let info = await transporter.sendMail({
-        from: '"'+host_data.name+'" <'+host_data.email+'>',
+        // from: '"'+host_data.name+'" <'+host_data.email+'>',
+        from: config.mailInfo.username,
         to: visitor_data.email,
         subject: "Checkout Link for meeting",
         html: message
@@ -144,6 +145,8 @@ async function checkoutSeneder(visitor_data,host_data){
       console.log("Message sent: %s", info.messageId);
     
 }
+
+
 function sendCheckoutLink(data,callback){
   console.log(data.email);
   var error;

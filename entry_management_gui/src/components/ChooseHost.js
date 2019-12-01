@@ -95,7 +95,7 @@ class ChooseHost extends Component {
     search_host = (target) => {
         if(this.state.hostInfo.length>=0){
             var arr = this.state.hostInfo
-            if(target.value.length!=0){
+            if(target.value.length!==0){
                 arr.forEach((host)=>{
                     console.log(host);
                     const a = host.name.toUpperCase(),
@@ -156,6 +156,8 @@ class ChooseHost extends Component {
             }
         )
     }
+
+
 
     componentWillUnmount(){
         this._mounted = false;
@@ -220,7 +222,7 @@ class ChooseHost extends Component {
 
                         {this.state.searchResults.length !==0 ? this.state.searchResults.map((anObjectMapped, index) => {
                             return (
-                                <a href="#" data-dismiss="modal" 
+                                <a href="/" data-dismiss="modal" 
                                 onClick = {() => this.setState({hostID : anObjectMapped._id})} 
                                 className="row m-2" key={`${anObjectMapped._id}`}>
 
@@ -266,6 +268,12 @@ class ChooseHost extends Component {
                         Are You a Host? &nbsp;
                         <button href="#" onClick={this.showHostForm} 
                                 className="text-warning z-depth-0 border-0 primary-color" >Register here</button>
+                    </div>
+                    <div style={this.sub_style}>
+                     Show active visitors &nbsp;
+                        <button href="#" onClick={this.props.showVisitors_table} 
+                                className="text-warning z-depth-0 border-0 primary-color" >Click here</button>
+                        
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 var mailInfo = {
-    username : 'siddharthkumarverma84262@gmail.com' ,
-    password : '1s2i3d@KV' 
+    service : "Yahoo",
+    username : 'thesid01@yahoo.com',
+    password : 'yceassbctrviyfyw' 
 }
 var nexmoInfo = {
     API_KEY: '49851512',

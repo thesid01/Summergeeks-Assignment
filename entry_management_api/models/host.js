@@ -51,9 +51,8 @@ function update(host_id, visitor_id,callback){
 
 async function sender(host_data,data) {
   let testAccount = await nodemailer.createTestAccount();
-
   let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: config.mailInfo.service,
     auth: {
       user: config.mailInfo.username,
       pass: config.mailInfo.password
@@ -66,7 +65,7 @@ async function sender(host_data,data) {
   <br><strong>Visitor Email :</strong> `+data.email+`
   `;
   let info = await transporter.sendMail({
-    from: '"'+data.name+'" <'+data.email+'>',
+    from: config.mailInfo.service,
     to: host_data.email,
     subject: "Remainder for meeting",
     html: message
@@ -103,9 +102,9 @@ function sendSMS(host_id, data,callback){
       const from = data.name;
       const to = '918604074906';
       const text = `
-      <strong>Visitor Name :</strong> `+data.name+`
-      <br><strong>Visitor Phone Number :</strong> `+data.phoneNumber+`
-      <br><strong>Visitor Email :</strong> `+data.email+`
+      Visitor Name : `+data.name+`
+      Visitor Phone Number : `+data.phoneNumber+`
+      Visitor Email : `+data.email+`
       `;
 
       nexmo.message.sendSms('918604074906', to, text,{type:'unicode'},(err,response)=>{

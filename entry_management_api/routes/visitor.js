@@ -58,13 +58,13 @@ router.post('/add/:id', (req, res, next) => {
                                         }
                                     });
 
-                                    host.sendSMS(req.params.id,data,(err)=>{
-                                        if(err){
-                                            console.log("Error while sending SMS");
-                                        }else{
-                                            console.log("SMS Sent");
-                                        }
-                                    });
+                                    // host.sendSMS(req.params.id,data,(err)=>{
+                                    //     if(err){
+                                    //         console.log("Error while sending SMS");
+                                    //     }else{
+                                    //         console.log("SMS Sent");
+                                    //     }
+                                    // });
                                 }
                             });
                           }
