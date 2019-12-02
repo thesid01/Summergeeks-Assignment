@@ -58,13 +58,13 @@ router.post('/add/:id', (req, res, next) => {
                                         }
                                     });
 
-                                    // host.sendSMS(req.params.id,data,(err)=>{
-                                    //     if(err){
-                                    //         console.log("Error while sending SMS");
-                                    //     }else{
-                                    //         console.log("SMS Sent");
-                                    //     }
-                                    // });
+                                    host.sendSMS(req.params.id,data,(err)=>{
+                                        if(err){
+                                            console.log("Error while sending SMS");
+                                        }else{
+                                            console.log("SMS Sent");
+                                        }
+                                    });
                                 }
                             });
                           }
@@ -99,20 +99,20 @@ router.get('/checkout/:id', (req,res,next)=>{
                 console.log(data.checkIn > data.checkOut);
                 data.checkOut = Date();
                 data.save();
-                // visitor.sendMail(data,(err)=>{
-                //     if(err){
-                //         console.log("Error while sending mail");
-                //     }else{
-                //         console.log("Mail Sent");
-                //     }
-                // });
-                // visitor.sendSMS(data,(err)=>{
-                //     if(err){
-                //         console.log("Error while sending SMS"); 
-                //     }else{
-                //         console.log("SMS Sent");
-                //     }
-                // });
+                visitor.sendMail(data,(err)=>{
+                    if(err){
+                        console.log("Error while sending mail");
+                    }else{
+                        console.log("Mail Sent");
+                    }
+                });
+                visitor.sendSMS(data,(err)=>{
+                    if(err){
+                        console.log("Error while sending SMS"); 
+                    }else{
+                        console.log("SMS Sent");
+                    }
+                });
                 // res.send({checkOut:1, name: data.name})
                 res.render('checkout',{checkOut:1, name: data.name});
             }else{
