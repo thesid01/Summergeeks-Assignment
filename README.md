@@ -59,7 +59,7 @@ This is a UI for **Summergeeks Assignment**, created using ReactJs
 >CORS (cross-origin-resource-sharing)
 
 ![Image](https://github.com/thesid01/Summergeeks-Assignment/blob/master/entry_management_gui/cors-errorpng.png) 
-If problem occurs CORS is blocking the connection to API, So what you have to do is Allow access to your UI URL from API ([LINK](https://github.com/thesid01/summergeeks_assignment_api)) in app.js File
+If problem occurs CORS is blocking the connection to API, So what you have to do is Allow access to your UI URL from API ([LINK](https://github.com/thesid01/Summergeeks-Assignment/blob/master/entry_management_api) in app.js File
 
 
 # Summergeeks Assignment API
@@ -116,6 +116,7 @@ Still, If you are unable to send mail, enable [Display Unlock Captcha](https://a
 If you want to use nodemailer with other services, check out the [official Site](https://nodemailer.com/usage/)
 
 >For using Yahoo services 
+
 Go to settings > account security > create a new app for account you will get a password for your app
 I recommend using Yahoo because it's easy to setup
 
