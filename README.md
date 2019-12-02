@@ -15,6 +15,7 @@ NodeJs (Installed)
 MongoDB(Installed)
 Nexmo(API for sending SMS)
 Nodemailer(npm Module)
+E-mail account
 ```
 
 ## How to run
@@ -36,6 +37,7 @@ Nodemailer(npm Module)
 10. cd Summergeeks-Assignment/entry_management_gui
 11. cd src
 12. Change config.json file according to your server URL 
+     and change url state by your server url.
 13. cd ../
 14. run npm install
 15. run npm start
@@ -94,12 +96,12 @@ VisitorSchema = {
 POST_REQUESTS
 Add_Host( To add a host) : /host/add
 Add_Visitor( To add a visitor)  : /visitor/add/:host_id
-Checkout( To checkout a visitor)  : /visitor/Checkout/:visitor_id
 
 GET_REQUESTS
 Show_Hosts( Show all hosts)  : /additional/show-hosts
 Check_Host_Existence( To check the existence host)  : /additional/check-host/:host_id 
-
+Checkout( To checkout a visitor)  : /visitor/Checkout/:visitor_id
+Show_visitors (show all visitors) : /additional/get-visitors
 ```
 
 ## How to Use Nodemailer
@@ -112,6 +114,10 @@ In [Config](https://github.com/thesid01/Summergeeks-Assignment/blob/master/entry
 Still, If you are unable to send mail, enable [Display Unlock Captcha](https://accounts.google.com/DisplayUnlockCaptcha)
 
 If you want to use nodemailer with other services, check out the [official Site](https://nodemailer.com/usage/)
+
+>For using Yahoo services 
+Go to settings > account security > create a new app for account you will get a password for your app
+I recommend using Yahoo because it's easy to setup
 
 ## How to Use Nexmo
 
