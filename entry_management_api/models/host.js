@@ -65,7 +65,7 @@ async function sender(host_data,data) {
   <br><strong>Visitor Email :</strong> `+data.email+`
   `;
   let info = await transporter.sendMail({
-    from: config.mailInfo.service,
+    from: config.mailInfo.username,
     to: host_data.email,
     subject: "Remainder for meeting",
     html: message
